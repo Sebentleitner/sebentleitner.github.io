@@ -73,3 +73,5 @@ int main() {
 
 ```
 
+**Die Ausgabe des Codes schaut wie folgt aus.**
+![Stack01](/img/Screenshot%202025-11-16%20144035.png)
