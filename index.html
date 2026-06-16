@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>RSS Reader - SWE2 Projekt</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/monokai.min.css">
+    
+    <style>
+        /* Kleine Schönheitskorrekturen für besseren Kontrast */
+        .reveal pre code {
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.85em;
+            line-height: 1.4em;
+        }
+        .reveal h2 {
+            color: #00d4ff; /* Moderner blauer Akzent für Überschriften */
+        }
+        .reveal blockquote {
+            background: rgba(255,255,255,0.05);
+            border-left: 4px solid #00d4ff;
+            box-shadow: none;
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="reveal">
+        <div class="slides">
+
+            <section data-markdown data-separator="^---" data-separator-vertical="^--">
+                <textarea data-template>
+
+# RSS Reader
+### SWE2 Projekt
+
+**Author:** Sebastian Entleitner  
+**Date:** 11.06.2026
+
+---
+
+## Projektbeschreibung
+
+**RSS-Reader**: Der RSS-Reader ermöglicht es, die RSS-Feeds einer beliebigen Zeitung/Informationsquelle einzulesen und in Kurzform auszugeben. 
+
+> Somit hat man immer die wichtigsten Nachrichten kurz und knapp im Überblick.
+
+---
+
+## XML-Repository
+
+```cs
+//RestClient
+var client = new RestClient();
+var request = new RestRequest(feed);
+var response = await client.GetAsync(request);
+var contentResponse = response?.Content ?? "";
+
+//Foreach Schleife 
+foreach (var be in b)
+{
+     XElement node = new XElement("beitrag");
+     node.Add(new XAttribute("id", be.Id));
+     node.Add(new XAttribute("title", be.Title));
+     node.Add(new XAttribute("description", be.Description));
+     node.Add(new XAttribute("date", be.DateTime.ToString("yyyy-MM-dd")));
+     node.Add(new XAttribute("url", be.Url));
+     _rootElement.Add(node);
+}
