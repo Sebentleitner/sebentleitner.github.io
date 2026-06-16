@@ -1,322 +1,290 @@
 ---
-Author: Sebastian
-Title: GINF Praesentation
+Author: Sebastian Entleitner
+Date: 11.06.20226
 ---
 
-# Stack 
+# RSS Reader - SWE2 Projekt
 
-```c
-#include <stdio.h>
+## Projektbeschriebung
 
-//Konstante Variable
-#define SIZE 10
+**RSS-Reader**: Der RSS-Reader ermöglicht es, die RSS-Feeds einer beliebigen Zeitung/Informationsquelle einzulesen und in kurzform auszugeben. Somit hat man immer die wichtigsten Nachrichten kurz und knapp im Überblick. 
 
-//Array bestehend aus Integer
-int stack[SIZE];
+## XML-Repository
 
-//"Oberster" Wert ist bei Stack wichtig!
-int top = -1;
+```cs
+//RestClient
+var client = new RestClient();
+var request = new RestRequest(feed);
+var response = await client.GetAsync(request);
+var contentResponse = response?.Content ?? "";
 
-//Funktion (void) --> ohne Rückgabewert
-void push(int value) {
+//Foreach Schleife 
+foreach (var be in b)
+ {
+     XElement node = new XElement("beitrag");
+     node.Add(new XAttribute("id", be.Id));
+     node.Add(new XAttribute("title", be.Title));
+     node.Add(new XAttribute("description", be.Description));
+     node.Add(new XAttribute("date", be.DateTime.ToString("yyyy-MM-dd")));
+     node.Add(new XAttribute("url", be.Url));
+     _rootElement.Add(node);
+ }
 
-   if (top < SIZE - 1) {
-      stack[++top] = value;
-      printf("Hinugefuegt %d\n", value);
-   }
+``` 
 
-   else {
-      printf("Stack overflow! Cannot push %d\n", value);
-   }
-}
+## Klassen (Beitrag, Feed)
 
-// Pop Methode,
-int pop() {
-   if (top >= 0) {
-      printf("Geloescht %d\n", stack[top]);
-      return stack[top--];
-   }
-   printf("Stack underflow! Nothing to pop.\n");
-   return -1; // leer
-}
+**Beitrag**
 
-//Methode um ein Stack auszugeben
-void printStack() {
-   if (top == -1) {
-      printf("Stack is empty.\n");
-      return;
-   }
-   printf("Current stack: ");
-   for (int i = 0; i <= top; i++) {
-      printf("%d ", stack[i]);
-   }
-   printf("\n");
-}
+```cs
+ public class Beitrag
+ {
+     //Properties
+     public string Id { get; set; } = string.Empty;
+     public string Title { get; set; } = string.Empty;
+     public string Description { get; set; } = string.Empty;
+     public DateTime DateTime { get; set; } = DateTime.Now;
+     public string Url { get; set; } = string.Empty;
+     public bool IsSaved { get; set; } = false;
 
-int main() {
-   push(5);
-   push(9);
-   push(2);
+     public override string ToString()
+     {
+         return $"[{DateTime.ToString("dd.MM.yyyy HH:mm")}] {Title}\nLink: {Url}\n";
+     }
+ }
 
-   printStack();
+ ```
 
-   pop();
-   pop();
+ **Feed**
 
-   printStack();
+ ```cs
+  public class Feed
+  {
+      
+          // Ein lesbarer Name für den Benutzer (z.B. "Tagesschau - Eilmeldungen")
+          public string Name { get; set; } = string.Empty;
 
-   pop();
-   pop();
+          // XML-URL des RSS-Feeds
+          public string Url { get; set; } = string.Empty;
 
-   return 0;
-}
+          //Konstruktor, Feed muss mit name und url erstellt werden
+          public Feed(string name, string url)
+          {
+              Name = name;
+              Url = url;
+          }
 
-```
+          public override string ToString()
+          {
+              return $"{Name} ({Url})";
+          }
+      }
 
-**Die Ausgabe des Codes schaut wie folgt aus.**
-![Stack01](/img/AusgabeStack.png)
+ ```
 
-## Queue
+ ## Singly Linked List
 
-```c
-#include <stdio.h>
+ ```cs
 
-//Konstante Variable
-#define SIZE 10
+// Hinzufügen
 
-//Array von Ganzzahlen
-int queue[SIZE];
+ public void Add(Beitrag beitrag)
+ {
+     SinglyListNode newNode = new SinglyListNode(beitrag);
+     SinglyListNode current = _header;
 
-//Wichtigesten Werte
-int front = 0;
-int rear = -1;
-int count = 0;
+     while (current.Next != null)
+     {
+         current = current.Next;
+     }
+     current.Next = newNode;
+ }
+
+//Alle Beiträge ausgeben
+
+  public void PrintAll()
+ {
+     SinglyListNode current = _header.Next; // Nach dem Header starten
+     if (current == null)
+     {
+         Console.WriteLine("Singly Linked List ist leer.");
+         return;
+     }
+     while (current != null)
+     {
+         Console.WriteLine($"[SLL - {current.Data.DateTime.ToString("yyyy-MM-dd")}] {current.Data.Title}");
+         current = current.Next;
+     }
+ }
 
 
-void enqueue(int value) {
-    if (count < SIZE) {
-        rear = (rear + 1) % SIZE;
-        queue[rear] = value;
-        count++;
-        printf("Enqueued %d\n", value);
-    } else {
-        printf("Queue overflow! Cannot enqueue %d\n", value);
+ // SLL Node
+
+ public class SinglyListNode
+{
+        // Properties
+        public Beitrag Data { get; set; }
+        public SinglyListNode Next { get; set; }
+
+        // Konstruktor für reguläre Knoten
+        public SinglyListNode(Beitrag data)
+        {
+            Data = data;
+            Next = null;
+        }
+
+        // Konstruktor für den Header-Knoten
+        public SinglyListNode()
+        {
+            Data = null;
+            Next = null;
+        }
+ }
+
+
+ ```
+ ## Doubly Linked List
+
+ ```cs
+
+ public class DoublyListNode
+ {
+     public Beitrag Data { get; set; }
+     public DoublyListNode Next { get; set; }
+     public DoublyListNode Previous { get; set; }
+
+     // Konstruktor für reguläre Knoten
+     public DoublyListNode(Beitrag data)
+     {
+         Data = data;
+         Next = null;
+         Previous = null;
+     }
+
+     // Konstruktor für die Dummy-Knoten
+     public DoublyListNode()
+     {
+         Data = null;
+         Next = null;
+         Previous = null;
+     }
+ }
+
+
+ // Einfügen am Ende (direkt vor dem Tail-Element)
+ public void Add(Beitrag beitrag)
+ {
+     DoublyListNode newNode = new DoublyListNode(beitrag);
+     DoublyListNode lastRealNode = _tail.Previous;
+
+     lastRealNode.Next = newNode;
+     newNode.Previous = lastRealNode;
+     newNode.Next = _tail;
+     _tail.Previous = newNode;
+ }
+
+
+
+  // Rückwärts durchlaufen
+ public void PrintBackward()
+ {
+     DoublyListNode current = _tail.Previous;
+     if (current == _header)
+     {
+         Console.WriteLine("Doubly Linked List ist leer.");
+         return;
+     }
+     while (current != _header)
+     {
+         Console.WriteLine($"[DLL Backward - {current.Data.DateTime.ToString("yyyy-MM-dd")}] {current.Data.Title}");
+         current = current.Previous;
+     }
+ }
+
+ ```
+
+ ## Binary Search Tree
+
+ ```cs
+ private TreeNode InsertRec(TreeNode root, Beitrag beitrag)
+ {
+     if (root == null)
+     {
+         return new TreeNode(beitrag);
+     }
+
+     // Sicheres Auslesen der Anfangsbuchstaben (In Großbuchstaben umgewandelt für korrekte Sortierung)
+     char neuerBuchstabe = string.IsNullOrEmpty(beitrag.Title) ? ' ' : char.ToUpper(beitrag.Title[0]);
+     char aktuellerBuchstabe = string.IsNullOrEmpty(root.Data.Title) ? ' ' : char.ToUpper(root.Data.Title[0]);
+
+     // Wenn das Zeichen im Alphabet weiter vorne steht -> nach links gehen
+     if (neuerBuchstabe < aktuellerBuchstabe)
+     {
+         root.Left = InsertRec(root.Left, beitrag);
+     }
+     // Wenn das Zeichen gleich ist oder weiter hinten steht -> nach rechts gehen
+     else
+     {
+         root.Right = InsertRec(root.Right, beitrag);
+     }
+
+     return root;
+ }
+
+
+     // Startet die sortierte Ausgabe
+    public void PrintInOrder()
+    {
+        if (_root == null)
+        {
+            Console.WriteLine("Der Baum ist leer.");
+            return;
+        }
+        PrintInOrderRec(_root);
     }
-}
 
-int dequeue() {
-    if (count > 0) {
-        int value = queue[front];
-        front = (front + 1) % SIZE;
-        count--;
-        printf("Dequeued %d\n", value);
-        return value;
-    }
-    printf("Queue underflow! Nothing to dequeue.\n");
-    return -1;
-}
+    // Besucht erst links (A), dann aktuell, dann rechts (Z)
+    private void PrintInOrderRec(TreeNode root)
+    {
+        if (root != null)
+        {
+            PrintInOrderRec(root.Left);
 
-void printQueue() {
-    if (count == 0) {
-        printf("Queue is empty.\n");
-        return;
+            // Holt den Anfangsbuchstaben für das Präfix
+            char anfangsBuchstabe = string.IsNullOrEmpty(root.Data.Title) ? '?' : char.ToUpper(root.Data.Title[0]);
+            Console.WriteLine($"[BST Alphabetisch - {anfangsBuchstabe}] {root.Data.Title} ({root.Data.DateTime:yyyy-MM-dd})");
+
+            PrintInOrderRec(root.Right);
+        }
     }
 
-    printf("Current queue: ");
-    for (int i = 0; i < count; i++) {
-        printf("%d ", queue[(front + i) % SIZE]);
-    }
-    printf("\n");
-}
+ ``` 
 
-int main() {
-    // Einfügen (enqueue)
-    enqueue(5);
-    enqueue(9);
-    enqueue(2);
+ **Stream Writer**
 
-    printQueue(); // → 5 9 2
+ ```cs
+ public void WriteToStream(StreamWriter sw, bool asCsv)
+ {
+     WriteToStreamRec(_root, sw, asCsv);
+ }
 
-    // Entfernen (dequeue)
-    dequeue();
-    dequeue();
+ // Hilfsmethode für Stream-Writer
+ private void WriteToStreamRec(TreeNode root, StreamWriter sw, bool asCsv)
+ {
+     if (root != null)
+     {
+         WriteToStreamRec(root.Left, sw, asCsv);
+         if (asCsv)
+         {
+             sw.WriteLine($"{root.Data.DateTime:yyyy-MM-dd};\"{root.Data.Title}\";\"{root.Data.Url}\"");
+         }
+         else
+         {
+             char anfangsBuchstabe = string.IsNullOrEmpty(root.Data.Title) ? '?' : char.ToUpper(root.Data.Title[0]);
+             sw.WriteLine($"[{anfangsBuchstabe}] {root.Data.Title} ({root.Data.DateTime:yyyy-MM-dd})");
+         }
+         WriteToStreamRec(root.Right, sw, asCsv);
+     }
+ }
 
-    printQueue();
-
-    dequeue();
-    dequeue();
-
-    return 0;
-}
-
-
-
-```
-
-![Queue01](/img/AusgabeQueue.png)
-
-
-## Stack (Advanced)
-
-```c
-#include <stdio.h>
-#include <string.h>
-
-#define MAX 100
-#define STRLEN 100
-
-typedef struct {
-    char data[MAX][STRLEN];
-    int top;
-} Stack;
-
-// --- Stack functions ---
-void init(Stack *s) {
-    s->top = -1;
-}
-
-int isEmpty(Stack *s) {
-    return s->top == -1;
-}
-
-int isFull(Stack *s) {
-    return s->top == MAX - 1;
-}
-
-void push(Stack *s, const char *item) {
-    if (!isFull(s)) {
-        strcpy(s->data[++s->top], item);
-    }
-}
-
-char* pop(Stack *s) {
-    if (!isEmpty(s)) {
-        return s->data[s->top--];
-    }
-    return NULL;
-}
-
-char* peek(Stack *s) {
-    if (!isEmpty(s)) {
-        return s->data[s->top];
-    }
-    return NULL;
-}
-
-// --- Application example ---
-int main() {
-    Stack undoStack, redoStack;
-    init(&undoStack);
-    init(&redoStack);
-
-    push(&undoStack, "Hello");
-    push(&undoStack, "Hello World");
-    push(&undoStack, "Hello World!!!");
-
-    printf("Current text: %s\n", peek(&undoStack));
-
-    printf("\nUndo:\n");
-    push(&redoStack, pop(&undoStack));
-    printf("Text is now: %s\n", peek(&undoStack));
-
-    printf("\nRedo:\n");
-    push(&undoStack, pop(&redoStack));
-    printf("Text is now: %s\n", peek(&undoStack));
-
-    return 0;
-}
-
-
-```
-
-
-## Queue (Advanced)
-
-
-```c
-#include <stdio.h>
-#include <string.h>
-
-#define SIZE 5
-#define STRLEN 100
-
-typedef struct {
-    char data[SIZE][STRLEN];
-    int front, rear, count;
-} Queue;
-
-void initQueue(Queue *q) {
-    q->front = 0;
-    q->rear = -1;
-    q->count = 0;
-}
-
-int isFullQueue(Queue *q) {
-    return q->count == SIZE;
-}
-
-int isEmptyQueue(Queue *q) {
-    return q->count == 0;
-}
-
-void enqueue(Queue *q, const char *job) {
-    if (isFullQueue(q)) {
-        printf("Queue full: cannot add '%s'\n", job);
-        return;
-    }
-    q->rear = (q->rear + 1) % SIZE;
-    strcpy(q->data[q->rear], job);
-    q->count++;
-    printf("Added job: %s\n", job);
-}
-
-void dequeue(Queue *q) {
-    if (isEmptyQueue(q)) {
-        printf("Queue empty: no job to process.\n");
-        return;
-    }
-    printf("Printing: %s\n", q->data[q->front]);
-    q->front = (q->front + 1) % SIZE;
-    q->count--;
-}
-
-void printQueue(Queue *q) {
-    printf("Current print queue: ");
-    if (isEmptyQueue(q)) {
-        printf("[empty]\n");
-        return;
-    }
-    for (int i = 0; i < q->count; i++) {
-        printf("%s ", q->data[(q->front + i) % SIZE]);
-    }
-    printf("\n");
-}
-
-int main() {
-    Queue q;
-    initQueue(&q);
-
-    enqueue(&q, "DocumentA.pdf");
-    enqueue(&q, "Report.docx");
-    enqueue(&q, "Invoice.png");
-
-    printQueue(&q);
-
-    dequeue(&q);
-    dequeue(&q);
-
-    enqueue(&q, "Slides.pptx");
-    enqueue(&q, "Homework.cpp");
-    enqueue(&q, "TooMuch.txt"); // overflow test
-
-    printQueue(&q);
-
-    return 0;
-}
-
-
-```
-
-
-
-
+ ``` 
