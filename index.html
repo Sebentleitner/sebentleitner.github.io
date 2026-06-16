@@ -1,78 +1,405 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-    <title>RSS Reader - SWE2 Projekt</title>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/monokai.min.css">
-    
+    <meta charset="UTF-8">
+    <title>RSS Reader - SWE2 Projektdokumentation</title>
     <style>
-        /* Kleine Schönheitskorrekturen für besseren Kontrast */
-        .reveal pre code {
-            padding: 15px;
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            color: #2e3440;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+            background-color: #f8fafc;
+        }
+
+        .header-banner {
+            background-color: #1e293b;
+            color: #f8fafc;
+            padding: 30px;
             border-radius: 8px;
-            font-size: 0.85em;
-            line-height: 1.4em;
+            border-bottom: 4px solid #3b82f6;
+            margin-bottom: 30px;
         }
-        .reveal h2 {
-            color: #00d4ff; /* Moderner blauer Akzent für Überschriften */
+
+        .header-meta {
+            font-size: 0.9em;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-        .reveal blockquote {
-            background: rgba(255,255,255,0.05);
-            border-left: 4px solid #00d4ff;
-            box-shadow: none;
-            padding: 10px 20px;
+
+        h1 {
+            font-size: 2.2em;
+            margin: 10px 0 5px 0;
+        }
+
+        .project-subtitle {
+            font-size: 1.2em;
+            color: #cbd5e1;
+        }
+
+        h2 {
+            font-size: 1.5em;
+            color: #0f172a;
+            border-left: 4px solid #3b82f6;
+            padding-left: 12px;
+            margin-top: 40px;
+            margin-bottom: 15px;
+        }
+
+        h3 {
+            font-size: 1.2em;
+            color: #1e293b;
+            margin-top: 25px;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        /* Info & Image styling */
+        .info-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .info-item {
+            background: #fff;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .info-item strong {
+            display: block;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            display: block;
+            margin-top: 5px;
+        }
+
+        /* Codeblock Styling */
+        pre {
+            background-color: #1e1e24;
+            color: #f8f8f2;
+            padding: 18px;
+            border-radius: 8px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.95em;
+            overflow-x: auto;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Syntax Highlighting */
+        .keyword { color: #ff79c6; font-weight: bold; }
+        .type { color: #8be9fd; }
+        .string { color: #f1fa8c; }
+        .comment { color: #6272a4; font-style: italic; }
+        .method { color: #50fa7b; }
+        .number { color: #bd93f9; }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
         }
     </style>
 </head>
 <body>
 
-    <div class="reveal">
-        <div class="slides">
+    <div class="header-banner">
+        <span class="header-meta">Autor: Sebastian Entleitner &nbsp;|&nbsp; Datum: 11.06.2026</span>
+        <h1>RSS Reader</h1>
+        <div class="project-subtitle">SWE2 Projekt-Dokumentation</div>
+    </div>
 
-            <section data-markdown data-separator="^---" data-separator-vertical="^--">
-                <textarea data-template>
+    <h2>Projektbeschreibung</h2>
+    <p><strong>RSS-Reader:</strong> Der RSS-Reader ermöglicht es, die RSS-Feeds einer beliebigen Zeitung/Informationsquelle einzulesen und in Kurzform auszugeben. Somit hat man immer die wichtigsten Nachrichten kurz und knapp im Überblick.</p>
 
-# RSS Reader
-### SWE2 Projekt
+    <h3>Infos &amp; Medien</h3>
+    <ul class="info-list">
+        <li class="info-item">
+            <strong>RSS Online (Link)</strong>
+            <img src="/img/rssxml.png" alt="RSSXML">
+        </li>
+        <li class="info-item">
+            <strong>XML Datei</strong>
+            <img src="/img/xmlrss.png" alt="RSS">
+        </li>
+        <li class="info-item">
+            <strong>Tool - RestSharp</strong>
+            <img src="/img/RestSharp.png" alt="Rest">
+        </li>
+    </ul>
 
-**Author:** Sebastian Entleitner  
-**Date:** 11.06.2026
+    <h3>Klassendiagramm</h3>
+    <div class="info-item">
+        <img src="/img/klassendiagramm.png" alt="Klassendiagramm">
+    </div>
 
----
+    <h2>XML-Repository</h2>
+    <pre><code><span class="comment">//RestClient</span>
+<span class="keyword">var</span> client = <span class="keyword">new</span> <span class="type">RestClient</span>();
+<span class="keyword">var</span> request = <span class="keyword">new</span> <span class="type">RestRequest</span>(feed);
+<span class="keyword">var</span> response = <span class="keyword">await</span> client.<span class="method">GetAsync</span>(request);
+<span class="keyword">var</span> contentResponse = response?.Content ?? <span class="string">""</span>;
 
-## Projektbeschreibung
-
-**RSS-Reader**: Der RSS-Reader ermöglicht es, die RSS-Feeds einer beliebigen Zeitung/Informationsquelle einzulesen und in Kurzform auszugeben. 
-
-> Somit hat man immer die wichtigsten Nachrichten kurz und knapp im Überblick.
-
-![Klassendigramm](/img/Klassendigramm.png)
-
----
-
-## XML-Repository
-
-```cs
-//RestClient
-var client = new RestClient();
-var request = new RestRequest(feed);
-var response = await client.GetAsync(request);
-var contentResponse = response?.Content ?? "";
-
-//Foreach Schleife 
-foreach (var be in b)
+<span class="comment">//Foreach Schleife</span>
+<span class="keyword">foreach</span> (<span class="keyword">var</span> be <span class="keyword">in</span> b)
 {
-     XElement node = new XElement("beitrag");
-     node.Add(new XAttribute("id", be.Id));
-     node.Add(new XAttribute("title", be.Title));
-     node.Add(new XAttribute("description", be.Description));
-     node.Add(new XAttribute("date", be.DateTime.ToString("yyyy-MM-dd")));
-     node.Add(new XAttribute("url", be.Url));
-     _rootElement.Add(node);
+    <span class="type">XElement</span> node = <span class="keyword">new</span> <span class="type">XElement</span>(<span class="string">"beitrag"</span>);
+    node.<span class="method">Add</span>(<span class="keyword">new</span> <span class="type">XAttribute</span>(<span class="string">"id"</span>, be.Id));
+    node.<span class="method">Add</span>(<span class="keyword">new</span> <span class="type">XAttribute</span>(<span class="string">"title"</span>, be.Title));
+    node.<span class="method">Add</span>(<span class="keyword">new</span> <span class="type">XAttribute</span>(<span class="string">"description"</span>, be.Description));
+    node.<span class="method">Add</span>(<span class="keyword">new</span> <span class="type">XAttribute</span>(<span class="string">"date"</span>, be.DateTime.<span class="method">ToString</span>(<span class="string">"yyyy-MM-dd"</span>)));
+    node.<span class="method">Add</span>(<span class="keyword">new</span> <span class="type">XAttribute</span>(<span class="string">"url"</span>, be.Url));
+    _rootElement.<span class="method">Add</span>(node);
+}</code></pre>
+
+    <h2>Klassen (Beitrag, Feed)</h2>
+    <h3>Beitrag</h3>
+    <pre><code><span class="keyword">public class</span> <span class="type">Beitrag</span>
+{
+    <span class="comment">//Properties</span>
+    <span class="keyword">public string</span> Id { <span class="keyword">get</span>; <span class="keyword">set</span>; } = <span class="keyword">string</span>.Empty;
+    <span class="keyword">public string</span> Title { <span class="keyword">get</span>; <span class="keyword">set</span>; } = <span class="keyword">string</span>.Empty;
+    <span class="keyword">public string</span> Description { <span class="keyword">get</span>; <span class="keyword">set</span>; } = <span class="keyword">string</span>.Empty;
+    <span class="keyword">public DateTime</span> DateTime { <span class="keyword">get</span>; <span class="keyword">set</span>; } = <span class="keyword">DateTime</span>.Now;
+    <span class="keyword">public string</span> Url { <span class="keyword">get</span>; <span class="keyword">set</span>; } = <span class="keyword">string</span>.Empty;
+    <span class="keyword">public bool</span> IsSaved { <span class="keyword">get</span>; <span class="keyword">set</span>; } = <span class="keyword">false</span>;
+
+    <span class="keyword">public override string</span> <span class="method">ToString</span>()
+    {
+        <span class="keyword">return</span> <span class="string">$"[{DateTime.ToString("dd.MM.yyyy HH:mm")}] {Title}\nLink: {Url}\n"</span>;
+    }
+}</code></pre>
+
+    <h3>Feed</h3>
+    <pre><code><span class="keyword">public class</span> <span class="type">Feed</span>
+{
+    <span class="comment">// Ein lesbarer Name für den Benutzer (z.B. "Tagesschau - Eilmeldungen")</span>
+    <span class="keyword">public string</span> Name { <span class="keyword">get</span>; <span class="keyword">set</span>; } = <span class="keyword">string</span>.Empty;
+
+    <span class="comment">// XML-URL des RSS-Feeds</span>
+    <span class="keyword">public string</span> Url { <span class="keyword">get</span>; <span class="keyword">set</span>; } = <span class="keyword">string</span>.Empty;
+
+    <span class="comment">// Konstruktor, Feed muss mit name und url erstellt werden</span>
+    <span class="keyword">public</span> <span class="method">Feed</span>(<span class="keyword">string</span> name, <span class="keyword">string</span> url)
+    {
+        Name = name;
+        Url = url;
+    }
+
+    <span class="keyword">public override string</span> <span class="method">ToString</span>()
+    {
+        <span class="keyword">return</span> <span class="string">$"{Name} ({Url})"</span>;
+    }
+}</code></pre>
+
+    <h2>Singly Linked List</h2>
+    <pre><code><span class="comment">// Hinzufügen</span>
+<span class="keyword">public void</span> <span class="method">Add</span>(<span class="type">Beitrag</span> beitrag)
+{
+    <span class="type">SinglyListNode</span> newNode = <span class="keyword">new</span> <span class="type">SinglyListNode</span>(beitrag);
+    <span class="type">SinglyListNode</span> current = _header;
+
+    <span class="keyword">while</span> (current.Next != <span class="keyword">null</span>)
+    {
+        current = current.Next;
+    }
+    current.Next = newNode;
 }
+
+<span class="comment">// Alle Beiträge ausgeben</span>
+<span class="keyword">public void</span> <span class="method">PrintAll</span>()
+{
+    <span class="type">SinglyListNode</span> current = _header.Next; <span class="comment">// Nach dem Header starten</span>
+    <span class="keyword">if</span> (current == <span class="keyword">null</span>)
+    {
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Singly Linked List ist leer."</span>);
+        <span class="keyword">return</span>;
+    }
+    <span class="keyword">while</span> (current != <span class="keyword">null</span>)
+    {
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"[SLL - {current.Data.DateTime.ToString("yyyy-MM-dd")}] {current.Data.Title}"</span>);
+        current = current.Next;
+    }
+}
+
+<span class="comment">// SLL Node</span>
+<span class="keyword">public class</span> <span class="type">SinglyListNode</span>
+{
+    <span class="keyword">public Beitrag</span> Data { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public SinglyListNode</span> Next { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+
+    <span class="keyword">public</span> <span class="method">SinglyListNode</span>(<span class="type">Beitrag</span> data)
+    {
+        Data = data;
+        Next = <span class="keyword">null</span>;
+    }
+
+    <span class="keyword">public</span> <span class="method">SinglyListNode</span>()
+    {
+        Data = <span class="keyword">null</span>;
+        Next = <span class="keyword">null</span>;
+    }
+}</code></pre>
+
+    <h2>Doubly Linked List</h2>
+    <pre><code><span class="keyword">public class</span> <span class="type">DoublyListNode</span>
+{
+    <span class="keyword">public Beitrag</span> Data { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public DoublyListNode</span> Next { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public DoublyListNode</span> Previous { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+
+    <span class="keyword">public</span> <span class="method">DoublyListNode</span>(<span class="type">Beitrag</span> data)
+    {
+        Data = data;
+        Next = <span class="keyword">null</span>;
+        Previous = <span class="keyword">null</span>;
+    }
+
+    <span class="keyword">public</span> <span class="method">DoublyListNode</span>()
+    {
+        Data = <span class="keyword">null</span>;
+        Next = <span class="keyword">null</span>;
+        Previous = <span class="keyword">null</span>;
+    }
+}
+
+<span class="comment">// Einfügen am Ende (direkt vor dem Tail-Element)</span>
+<span class="keyword">public void</span> <span class="method">Add</span>(<span class="type">Beitrag</span> beitrag)
+{
+    <span class="type">DoublyListNode</span> newNode = <span class="keyword">new</span> <span class="type">DoublyListNode</span>(beitrag);
+    <span class="type">DoublyListNode</span> lastRealNode = _tail.Previous;
+
+    lastRealNode.Next = newNode;
+    newNode.Previous = lastRealNode;
+    newNode.Next = _tail;
+    _tail.Previous = newNode;
+}
+
+<span class="comment">// Rückwärts durchlaufen</span>
+<span class="keyword">public void</span> <span class="method">PrintBackward</span>()
+{
+    <span class="type">DoublyListNode</span> current = _tail.Previous;
+    <span class="keyword">if</span> (current == _header)
+    {
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Doubly Linked List ist leer."</span>);
+        <span class="keyword">return</span>;
+    }
+    <span class="keyword">while</span> (current != _header)
+    {
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"[DLL Backward - {current.Data.DateTime.ToString("yyyy-MM-dd")}] {current.Data.Title}"</span>);
+        current = current.Previous;
+    }
+}</code></pre>
+
+    <h2>Binary Search Tree</h2>
+    <pre><code><span class="keyword">private TreeNode</span> <span class="method">InsertRec</span>(<span class="type">TreeNode</span> root, <span class="type">Beitrag</span> beitrag)
+{
+    <span class="keyword">if</span> (root == <span class="keyword">null</span>)
+    {
+        <span class="keyword">return</span> <span class="keyword">new</span> <span class="type">TreeNode</span>(beitrag);
+    }
+
+    <span class="keyword">char</span> neuerBuchstabe = <span class="keyword">string</span>.<span class="method">IsNullOrEmpty</span>(beitrag.Title) ? <span class="string">' '</span> : <span class="keyword">char</span>.<span class="method">ToUpper</span>(beitrag.Title[<span class="number">0</span>]);
+    <span class="keyword">char</span> aktuellerBuchstabe = <span class="keyword">string</span>.<span class="method">IsNullOrEmpty</span>(root.Data.Title) ? <span class="string">' '</span> : <span class="keyword">char</span>.<span class="method">ToUpper</span>(root.Data.Title[<span class="number">0</span>]);
+
+    <span class="keyword">if</span> (neuerBuchstabe &lt; aktuellerBuchstabe)
+    {
+        root.Left = <span class="method">InsertRec</span>(root.Left, beitrag);
+    }
+    <span class="keyword">else</span>
+    {
+        root.Right = <span class="method">InsertRec</span>(root.Right, beitrag);
+    }
+
+    <span class="keyword">return</span> root;
+}
+
+<span class="comment">// Startet die sortierte Ausgabe</span>
+<span class="keyword">public void</span> <span class="method">PrintInOrder</span>()
+{
+    <span class="keyword">if</span> (_root == <span class="keyword">null</span>)
+    {
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Der Baum ist leer."</span>);
+        <span class="keyword">return</span>;
+    }
+    <span class="method">PrintInOrderRec</span>(_root);
+}
+
+<span class="keyword">private void</span> <span class="method">PrintInOrderRec</span>(<span class="type">TreeNode</span> root)
+{
+    <span class="keyword">if</span> (root != <span class="keyword">null</span>)
+    {
+        <span class="method">PrintInOrderRec</span>(root.Left);
+
+        <span class="keyword">char</span> anfangsBuchstabe = <span class="keyword">string</span>.<span class="method">IsNullOrEmpty</span>(root.Data.Title) ? <span class="string">'?'</span> : <span class="keyword">char</span>.<span class="method">ToUpper</span>(root.Data.Title[<span class="number">0</span>]);
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"[BST Alphabetisch - {anfangsBuchstabe}] {root.Data.Title} ({root.Data.DateTime:yyyy-MM-dd})"</span>);
+
+        <span class="method">PrintInOrderRec</span>(root.Right);
+    }
+}
+
+<span class="keyword">public class</span> <span class="type">TreeNode</span>
+{
+    <span class="keyword">public Beitrag</span> Data { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public TreeNode</span> Left { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public TreeNode</span> Right { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+
+    <span class="keyword">public</span> <span class="method">TreeNode</span>(<span class="type">Beitrag</span> data)
+    {
+        Data = data;
+        Left = <span class="keyword">null</span>;
+        Right = <span class="keyword">null</span>;
+    }
+}</code></pre>
+
+    <h3>Stream Writer</h3>
+    <pre><code><span class="keyword">public void</span> <span class="method">WriteToStream</span>(<span class="type">StreamWriter</span> sw, <span class="keyword">bool</span> asCsv)
+{
+    <span class="method">WriteToStreamRec</span>(_root, sw, asCsv);
+}
+
+<span class="keyword">private void</span> <span class="method">WriteToStreamRec</span>(<span class="type">TreeNode</span> root, <span class="type">StreamWriter</span> sw, <span class="keyword">bool</span> asCsv)
+{
+    <span class="keyword">if</span> (root != <span class="keyword">null</span>)
+    {
+        <span class="method">WriteToStreamRec</span>(root.Left, sw, asCsv);
+        <span class="keyword">if</span> (asCsv)
+        {
+            sw.<span class="method">WriteLine</span>(<span class="string">$"{root.Data.DateTime:yyyy-MM-dd};\"{root.Data.Title}\";\"{root.Data.Url}\""</span>);
+        }
+        <span class="keyword">else</span>
+        {
+            <span class="keyword">char</span> anfangsBuchstabe = <span class="keyword">string</span>.<span class="method">IsNullOrEmpty</span>(root.Data.Title) ? <span class="string">'?'</span> : <span class="keyword">char</span>.<span class="method">ToUpper</span>(root.Data.Title[<span class="number">0</span>]);
+            sw.<span class="method">WriteLine</span>(<span class="string">$"[{anfangsBuchstabe}] {root.Data.Title} ({root.Data.DateTime:yyyy-MM-dd})"</span>);
+        }
+        <span class="method">WriteToStreamRec</span>(root.Right, sw, asCsv);
+    }
+}</code></pre>
+
+    <h2>Program.cs</h2>
+    <h3>Bestandteile</h3>
+    <ul>
+        <li>Benutzereingaben einlesen</li>
+        <li>Menü (Switch, Case, Break)</li>
+        <li>Fehlerbehandlung (Try/Catch)</li>
+    </ul>
+
+</body>
+</html>
